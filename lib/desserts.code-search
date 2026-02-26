@@ -1,0 +1,28 @@
+# Query: desserts
+# ContextLines: 1
+
+28 results - 7 files
+
+.history\lib\data_20250519091332.ts:
+    7    { id: "أخـري", name: "أخـري" },
+ 
+.history\lib\data_20260220193018.ts:
+    7    { id: "أخـري", name: "أخـري" },
+  
+
+.history\lib\data_20260220193106.ts:
+    7    { id: "أخـري", name: "أخـري" },
+   
+.history\lib\data_20260220193139.ts:
+    7    { id: "أخـري", name: "أخـري" },
+
+
+.history\lib\data_20260220193218.ts:
+    7    { id: "أخـري", name: "أخـري" },
+   
+.history\lib\data_20260220193412.ts:
+    7    { id: "أخـري", name: "أخـري" },
+   
+lib\data.ts:
+    7    { id: "أخـري", name: "أخـري" },
+  

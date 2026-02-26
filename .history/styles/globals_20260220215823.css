@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* --- Light Mode (خلفية بيضاء + باليت البن الهادئة) --- */
+    --background: 0 0% 100%;
+    --foreground: 12 3% 28%;    /* #4A4947 */
+    --primary: 25 31% 47%;      /* #B17457 البني المميز للأزرار */
+    --primary-foreground: 40 40% 97%; /* #FAF7F0 */
+    --border: 25 31% 47%;
+    --ring: 25 31% 47%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* --- Dark Mode (خلفية سوداء + باليت البن العميقة) --- */
+    --background: 0 0% 3.9%;
+    --foreground: 50 35% 85%;   /* #E5E5CB */
+    --primary: 20 25% 15%;      /* #3C2A21 بني غامق فخم */
+    --primary-foreground: 50 35% 85%;
+    --border: 20 25% 15%;
+    --ring: 50 35% 85%;
+  }
+}
+
+@layer base {
+  /* إجبار الخلفية والنص */
+  body {
+    background-color: white !important;
+    color: #4A4947 !important;
+  }
+
+  .dark body {
+    background-color: #0A0A0A !important;
+    color: #E5E5CB !important;
+  }
+
+  /* --- القضاء على اللون الأورنج في الأزرار --- */
+  .bg-primary, 
+  button.bg-primary,
+  [data-radix-collection-item].bg-primary {
+    background-color: #B17457 !important; /* اللون البني الجديد */
+    color: #FAF7F0 !important;
+  }
+
+  .dark .bg-primary,
+  .dark button.bg-primary {
+    background-color: #3C2A21 !important; /* البني الغامق في الدارك */
+    color: #E5E5CB !important;
+  }
+  
+  /* تلوين الـ Borders عشان تليق مع البني */
+  .border-primary {
+    border-color: #B17457 !important;
+  }
+}

@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* فرض الألوان مباشرة باستخدام الـ Hex */
+body {
+  background-color: #FED8B1 !important; /* لون البيج الفاتح */
+  color: #6F4E37 !important;           /* لون النص البني */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* في حالة الوضع المظلم */
+.dark body {
+  background-color: #290001 !important; /* لون القهوة المحروق */
+  color: #DBCBBD !important;           /* لون النص البيج */
+}
+
+@layer base {
+  :root {
+    --background: 30 97% 85%;
+    --foreground: 25 34% 33%;
+    --primary: 26 29% 50%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 359 100% 8%;
+    --foreground: 28 28% 85%;
+    --primary: 22 65% 32%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}

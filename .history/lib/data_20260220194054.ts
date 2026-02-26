@@ -1,0 +1,114 @@
+import type { Category, FoodItem } from "./types"
+
+export const categories: Category[] = [
+  { id: "كلاسـيك", name: "كلاسـيك" },
+  { id: "جولـد", name: "جولـد" },
+  { id: "اسـبريـسو", name: "اسـبريـسو" },
+  { id: "أخـري", name: "أخـري" },
+ 
+]
+
+export function getFoodItems(): FoodItem[] {
+  return [
+    {
+      id: "classic-burger",
+      name: "Classic Burger",
+      description: "Juicy beef patty with lettuce, tomato, and our special sauce on a toasted bun",
+      price: 9.99,
+      image: "/placeholder-sqmcc.png",
+      categoryId: "كلاسـيك",
+      featured: true,
+    },
+    {
+      id: "cheese-burger",
+      name: "Cheese Burger",
+      description: "Our classic burger topped with melted cheddar cheese",
+      price: 10.99,
+      image: "/cheeseburger-melted-cheese.png",
+      categoryId: "كلاسـيك",
+      featured: false,
+    },
+    {
+      id: "bacon-burger",
+      name: "Bacon Burger",
+      description: "Classic burger with crispy bacon strips and cheese",
+      price: 12.99,
+      image: "/bacon-burger.png",
+      categoryId: "كلاسـيك",
+      featured: true,
+    },
+    {
+      id: "veggie-burger",
+      name: "Veggie Burger",
+      description: "Plant-based patty with fresh vegetables and vegan mayo",
+      price: 11.99,
+      image: "/vegetarian-plant-based-burger.png",
+      categoryId: "كلاسـيك",
+      featured: false,
+    },
+    {
+      id: "margherita-pizza",
+      name: "Margherita Pizza",
+      description: "Classic pizza with tomato sauce, mozzarella, and fresh basil",
+      price: 12.99,
+      image: "/placeholder.svg?height=400&width=400&query=margherita pizza with tomato and cheese",
+      categoryId: "جولـد",
+      featured: true,
+    },
+    {
+      id: "pepperoni-pizza",
+      name: "Pepperoni Pizza",
+      description: "Pizza topped with tomato sauce, mozzarella, and pepperoni slices",
+      price: 14.99,
+      image: "/placeholder.svg?height=400&width=400&query=pepperoni pizza",
+      categoryId: "جولـد",
+      featured: true,
+    },
+    {
+      id: "veggie-pizza",
+      name: "Veggie Supreme Pizza",
+      description: "Pizza loaded with bell peppers, mushrooms, onions, and olives",
+      price: 13.99,
+      image: "/placeholder.svg?height=400&width=400&query=vegetable pizza with bell peppers and mushrooms",
+      categoryId: "جولـد",
+      featured: false,
+    },
+    {
+      id: "caesar-salad",
+      name: "Caesar Salad",
+      description: "Crisp romaine lettuce with Caesar dressing, croutons, and parmesan",
+      price: 8.99,
+      image: "/placeholder.svg?height=400&width=400&query=caesar salad with croutons",
+      categoryId: "اسـبريـسو",
+      featured: false,
+    },
+    {
+      id: "greek-salad",
+      name: "Greek Salad",
+      description: "Fresh salad with tomatoes, cucumbers, olives, and feta cheese",
+      price: 9.99,
+      image: "/placeholder.svg?height=400&width=400&query=greek salad with feta cheese",
+      categoryId: "اسـبريـسو",
+      featured: true,
+    },
+    {
+      id: "french-fries",
+      name: "French Fries",
+      description: "Crispy golden fries seasoned with salt",
+      price: 3.99,
+      image: "/placeholder.svg?height=400&width=400&query=crispy french fries",
+      categoryId: "أخـري",
+      featured: true,
+    },
+    {
+      id: "onion-rings",
+      name: "Onion Rings",
+      description: "Crispy battered onion rings served with dipping sauce",
+      price: 4.99,
+      image: "/placeholder.svg?height=400&width=400&query=crispy onion rings",
+      categoryId: "أخـري",
+      featured: false,
+    },
+    
+  ]
+}

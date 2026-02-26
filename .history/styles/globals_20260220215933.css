@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    /* --- Light Mode (خلفية بيضاء + باليت فاتحة) --- */
+    --background: 60 50% 100%;    /* أبيض صريح */
+    --foreground: 25 34% 33%;    /* بني نصوص #6F4E37 */
+    --card: 0 0% 100%;
+    --card-foreground: 25 34% 33%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 25 34% 33%;
+    --primary: 26 29% 50%;       /* بني الأزرار #A67B5B */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 75% 69%;     /* بيج التمييز #ECB176 */
+    --secondary-foreground: 25 34% 33%;
+    --muted: 33 97% 85%;         /* لمسة من #FED8B1 */
+    --muted-foreground: 25 34% 45%;
+    --accent: 30 75% 69%;
+    --accent-foreground: 25 34% 33%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 26 29% 50%;
+    --input: 26 29% 50%;
+    --ring: 25 34% 33%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 25 34% 33%;
+    --sidebar-primary: 26 29% 50%;
+    --sidebar-accent: 30 75% 69%;
+  }
+
+  .dark {
+    /* --- Dark Mode (خلفية سوداء + باليت غامقة) --- */
+    --background: 0 0% 3.9%;     /* أسود صريح */
+    --foreground: 28 28% 80%;    /* نصوص بيج فاتح #DBCBBD */
+    --card: 0 0% 7%;
+    --card-foreground: 28 28% 80%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 28 28% 80%;
+    --primary: 22 65% 32%;       /* بني محروق #87431D */
+    --primary-foreground: 28 28% 80%;
+    --secondary: 25 57% 52%;     /* نحاسي #C87941 */
+    --secondary-foreground: 359 100% 8%;
+    --muted: 359 100% 8%;        /* لمسة من #290001 */
+    --muted-foreground: 28 28% 65%;
+    --accent: 25 57% 52%;
+    --accent-foreground: 359 100% 8%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 22 65% 32%;
+    --input: 22 65% 32%;
+    --ring: 25 57% 52%;
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 28 28% 80%;
+    --sidebar-primary: 22 65% 32%;
+    --sidebar-accent: 25 57% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    /* إجبار التطبيق على استخدام الخلفية والنصوص المحددة */
+    background-color: hsl(var(--background)) !important;
+    color: hsl(var(--foreground)) !important;
+  }
+}

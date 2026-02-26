@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  :root {
+    /* --- Light Mode HSL --- */
+    --background: 30 97% 85%;    /* #FED8B1 */
+    --foreground: 25 34% 33%;    /* #6F4E37 */
+    --card: 30 97% 90%;
+    --card-foreground: 25 34% 33%;
+    --popover: 30 97% 90%;
+    --popover-foreground: 25 34% 33%;
+    --primary: 26 29% 50%;       /* #A67B5B */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 75% 69%;     /* #ECB176 */
+    --secondary-foreground: 25 34% 33%;
+    --muted: 30 50% 85%;
+    --muted-foreground: 25 34% 45%;
+    --accent: 30 75% 69%;
+    --accent-foreground: 25 34% 33%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 26 29% 50%;
+    --input: 26 29% 50%;
+    --ring: 25 34% 33%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* --- Dark Mode HSL --- */
+    --background: 359 100% 8%;   /* #290001 */
+    --foreground: 28 28% 80%;    /* #DBCBBD */
+    --card: 359 80% 12%;
+    --card-foreground: 28 28% 80%;
+    --popover: 359 80% 12%;
+    --popover-foreground: 28 28% 80%;
+    --primary: 22 65% 32%;       /* #87431D */
+    --primary-foreground: 28 28% 80%;
+    --secondary: 25 57% 52%;     /* #C87941 */
+    --secondary-foreground: 359 100% 8%;
+    --muted: 359 60% 15%;
+    --muted-foreground: 28 28% 65%;
+    --accent: 25 57% 52%;
+    --accent-foreground: 359 100% 8%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 22 65% 32%;
+    --input: 22 65% 32%;
+    --ring: 25 57% 52%;
+  }
+}
+
+/* --- الجزء ده هو اللي هيحل المشكلة "إجبارياً" --- */
+@layer base {
+  body {
+    background-color: hsl(30 97% 85%) !important; /* فرض لون الخلفية البيج */
+    color: hsl(25 34% 33%) !important;           /* فرض لون النص البني */
+  }
+
+  .dark body {
+    background-color: hsl(359 100% 8%) !important; /* فرض لون القهوة المحروق في الدارك */
+    color: hsl(28 28% 80%) !important;
+  }
+  
+  /* إجبار الأزرار الرئيسية تاخد لون البني المتوسط */
+  .bg-primary {
+    background-color: hsl(0, 87%, 50%) !important;
+  }
+  
+  .dark .bg-primary {
+    background-color: hsl(22 65% 32%) !important;
+  }
+}

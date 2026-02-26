@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    /* ---------------- Light Mode (باليت اللاتيه والبيج) ---------------- */
+    --background: 30 97% 85%; /* لون الخلفية البيج الفاتح #FED8B1 */
+    --foreground: 25 34% 33%; /* لون النصوص بني غامق #6F4E37 */
+    
+    --card: 30 97% 92%; /* كروت المنتجات أفتح درجة بسيطة جداً للتمييز */
+    --card-foreground: 25 34% 33%;
+    
+    --popover: 30 97% 92%;
+    --popover-foreground: 25 34% 33%;
+    
+    --primary: 26 29% 50%; /* لون الزرار الأساسي بني متوسط #A67B5B */
+    --primary-foreground: 0 0% 100%; /* لون النص جوه الزرار أبيض عشان يكون واضح */
+    
+    --secondary: 30 75% 69%; /* الأزرار الثانوية بالبيج الغامق #ECB176 */
+    --secondary-foreground: 25 34% 33%;
+    
+    --muted: 30 50% 80%;
+    --muted-foreground: 25 34% 45%;
+    
+    --accent: 30 75% 69%; /* لون الـ Hover أو التحديد #ECB176 */
+    --accent-foreground: 25 34% 33%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 26 29% 50%; /* حدود العناصر #A67B5B */
+    --input: 26 29% 50%;
+    --ring: 25 34% 33%; 
+
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    
+    /* القائمة الجانبية (Sidebar) لو موجودة عندك هتتشبع بنفس الألوان */
+    --sidebar-background: 30 97% 85%;
+    --sidebar-foreground: 25 34% 33%;
+    --sidebar-primary: 26 29% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 30 75% 69%;
+    --sidebar-accent-foreground: 25 34% 33%;
+    --sidebar-border: 26 29% 50%;
+    --sidebar-ring: 25 34% 33%;
+  }
+  
+  .dark {
+    /* ---------------- Dark Mode (باليت الاسبريسو الفخمة) ---------------- */
+    --background: 359 100% 8%; /* خلفية الموقع بني محروق/أسود #290001 */
+    --foreground: 28 28% 80%; /* النصوص بيج فاتح ومريح #DBCBBD */
+    
+    --card: 359 80% 12%; /* كروت المنتجات أفتح سِنة من الخلفية عشان تظهر */
+    --card-foreground: 28 28% 80%;
+    
+    --popover: 359 80% 12%;
+    --popover-foreground: 28 28% 80%;
+    
+    --primary: 22 65% 32%; /* لون الأزرار الأساسية #87431D */
+    --primary-foreground: 28 28% 80%; /* نص الأزرار #DBCBBD */
+    
+    --secondary: 25 57% 52%; /* اللون النحاسي الجميل #C87941 */
+    --secondary-foreground: 359 100% 8%; /* نصها بلون الخلفية الغامق */
+    
+    --muted: 359 60% 15%;
+    --muted-foreground: 28 28% 65%;
+    
+    --accent: 25 57% 52%; /* النحاسي للـ Hover */
+    --accent-foreground: 359 100% 8%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 22 65% 32%;
+    --input: 22 65% 32%;
+    --ring: 25 57% 52%;
+    
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    
+    --sidebar-background: 359 100% 8%;
+    --sidebar-foreground: 28 28% 80%;
+    --sidebar-primary: 22 65% 32%;
+    --sidebar-primary-foreground: 28 28% 80%;
+    --sidebar-accent: 25 57% 52%;
+    --sidebar-accent-foreground: 359 100% 8%;
+    --sidebar-border: 22 65% 32%;
+    --sidebar-ring: 25 57% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
