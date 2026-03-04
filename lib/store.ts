@@ -67,7 +67,7 @@ export const useCartStore = create<CartState>()(
       getTotal: () => {
         return get().items.reduce((total, item) => {
           // Find the price for the specific size of the item
-          const sizeDetails = item.sizes.find(s => s.name === item.size);
+          const sizeDetails = item.sizes?.find(s => s.name === item.size);
           const price = sizeDetails ? sizeDetails.price : 0;
           return total + price * item.quantity;
         }, 0);

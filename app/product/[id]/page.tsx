@@ -18,13 +18,17 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const [item, setItem] = useState<FoodItem | null>(null)
   const [selectedSize, setSelectedSize] = useState<Size | null>(null)
   const [loading, setLoading] = useState(true)
-  const { products } = useOrderStore() // تغيير: جلب المنتجات من المخزن الصحيح
+  const { products, initListener } = useOrderStore() // تغيير: جلب المنتجات من المخزن الصحيح
   // @ts-ignore - التعامل مع اختلاف تسمية الدالة في الستور
   const cartStore = useCartStore()
   // @ts-ignore
   const addFunction = cartStore.addItem || cartStore.addToCart
   // @ts-ignore
   const { toast } = useToast() || { toast: console.log }
+
+  useEffect(() => {
+    initListener()
+  }, [initListener])
 
   useEffect(() => {
     setLoading(true)
@@ -48,7 +52,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             // عرض الحجم فقط إذا كان له سعر محدد (أكبر من 0)
             if (sizeDetails && Number(sizeDetails.price) > 0) {
                 foodItemSizes.push({
-                    name: key,
+                    name: key as Size["name"],
                     price: Number(sizeDetails.price),
                     images: [sizeDetails.image || "/placeholder.svg"],
                 });
@@ -60,7 +64,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
              Object.entries(product.sizes).forEach(([key, val]: [string, any]) => {
                  if (val && Number(val.price) > 0) {
                      foodItemSizes.push({
-                         name: key,
+                         name: key as Size["name"],
                          price: Number(val.price),
                          images: [val.image || "/placeholder.svg"]
                      })

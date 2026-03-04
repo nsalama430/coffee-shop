@@ -1,11 +1,17 @@
 "use client"
+import { useEffect } from "react"
 import { PromoBanner } from "@/components/promo-banner"
 import { useOrderStore } from "@/lib/orderStore"
 import { FoodItemCard } from "@/components/food-item-card"
-import type { FoodItem } from "@/lib/types"
+import type { FoodItem, Size } from "@/lib/types"
 
 export default function HomePage() {
-  const { products } = useOrderStore()
+  const { products, initListener } = useOrderStore()
+
+  // تشغيل الاستماع لـ Firestore عند فتح الصفحة
+  useEffect(() => {
+    initListener()
+  }, [initListener])
 
   return (
     <main className="container mx-auto px-4 py-6 space-y-8">
@@ -16,15 +22,42 @@ export default function HomePage() {
         {products.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {products.map((product) => {
-              // تحويل بيانات المنتج البسيطة لتناسب شكل الكارت
+              // تحويل بيانات المنتج من Firestore لتناسب شكل الكارت
+              let foodItemSizes: Size[] = [];
+
+              // التعامل مع الـ sizes سواء كان object أو array
+              if (product.sizes && typeof product.sizes === 'object' && !Array.isArray(product.sizes)) {
+                // الـ sizes عبارة عن object مثل { "50g": { price, image }, ... }
+                const sizeOrder: Array<Size["name"]> = ["50g", "100g", "250g"];
+                sizeOrder.forEach(key => {
+                  const sizeData = (product.sizes as Record<string, { price: number; image: string }>)?.[key];
+                  if (sizeData && Number(sizeData.price) > 0) {
+                    foodItemSizes.push({
+                      name: key,
+                      price: Number(sizeData.price),
+                      images: [sizeData.image || "/placeholder.svg"],
+                    });
+                  }
+                });
+              }
+
+              // لو مفيش أحجام، نستخدم السعر والصورة الافتراضية
+              if (foodItemSizes.length === 0) {
+                foodItemSizes = [{ 
+                  name: "100g", 
+                  price: product.price, 
+                  images: [product.image || "/placeholder.svg"] 
+                }];
+              }
+
               const foodItem: FoodItem = {
                 id: product.id,
                 name: product.name,
-                description: product.category,
-                categoryId: 'coffee',
+                description: product.description || product.category,
+                categoryId: product.categoryId || product.category || 'coffee',
                 featured: false,
-                roastLevel: "وسط",
-                sizes: [{ name: "100g", price: product.price, images: [product.image] }]
+                roastLevel: (product.roastLevel as FoodItem["roastLevel"]) || "وسط",
+                sizes: foodItemSizes
               }
               return (
                 <div key={product.id} className="h-full">

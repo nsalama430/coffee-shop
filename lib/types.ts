@@ -38,4 +38,6 @@ export interface Order {
   items: CartItem[]
   total: number
   status: OrderStatus
+  createdAt?: string | Date
+  completedAt?: string | Date
 }

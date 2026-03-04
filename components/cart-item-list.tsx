@@ -13,9 +13,9 @@ export function CartItemList() {
     <div className="space-y-4">
       {items.map((item) => {
         // Find the details for the selected size
-        const sizeDetails = item.sizes.find(s => s.name === item.size);
+        const sizeDetails = item.sizes?.find(s => s.name === item.size);
         const price = sizeDetails ? sizeDetails.price : 0;
-        const image = sizeDetails ? sizeDetails.images[0] : item.sizes[0]?.images[0];
+        const image = sizeDetails ? sizeDetails.images[0] : item?.sizes[0]?.images[0];
 
         return (
           <div key={item.id + item.size} className="flex items-center gap-4 py-4 border-b last:border-0">

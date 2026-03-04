@@ -1,0 +1,16 @@
+﻿app/admin/page.tsx(60,9): error TS2322: Type 'import("F:/project-freelance/coffee-shop/lib/types").Order[]' is not assignable to type 'Order[]'.
+  Type 'import("F:/project-freelance/coffee-shop/lib/types").Order' is not assignable to type 'Order'.
+    Types of property 'items' are incompatible.
+      Type 'CartItem[]' is not assignable to type 'OrderItem[]'.
+        Property 'price' is missing in type 'CartItem' but required in type 'OrderItem'.
+app/admin/page.tsx(118,19): error TS2345: Argument of type '{ name: string; price: number; id: string; image?: string; category?: string; }' is not assignable to parameter of type 'Product'.
+  Types of property 'image' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+app/admin/page.tsx(410,91): error TS2345: Argument of type 'string' is not assignable to parameter of type 'OrderStatus'.
+app/product/[id]/page.tsx(51,21): error TS2322: Type 'string' is not assignable to type '"50g" | "100g" | "250g"'.
+app/product/[id]/page.tsx(60,37): error TS2339: Property 'sizes' does not exist on type 'Product'.
+app/product/[id]/page.tsx(63,26): error TS2322: Type 'string' is not assignable to type '"50g" | "100g" | "250g"'.
+components/theme-provider.tsx(3,41): error TS2307: Cannot find module 'next-themes/dist/types' or its corresponding type declarations.
+lib/orderStore.ts(36,28): error TS2367: This comparison appears to be unintentional because the types 'OrderStatus' and '"Completed"' have no overlap.
+lib/orderStore.ts(36,86): error TS2339: Property 'completedAt' does not exist on type 'Order'.
