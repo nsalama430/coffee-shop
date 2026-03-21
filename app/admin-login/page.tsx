@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import { signInWithEmailAndPassword, setPersistence, browserSessionPersistence } from "firebase/auth";
+import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import { useRouter } from "next/navigation";
 import { Coffee, Lock, AlertCircle, ArrowRight, User, Eye, EyeOff, UserPlus } from "lucide-react";
@@ -23,7 +23,7 @@ export default function AdminLogin() {
             // Construct the dummy email from the username
             const email = `${name.replace(/\s+/g, '-').toLowerCase()}@c.com`;
 
-            await setPersistence(auth, browserSessionPersistence);
+            await setPersistence(auth, browserLocalPersistence);
             await signInWithEmailAndPassword(auth, email, password);
             router.push("/admin");
 
