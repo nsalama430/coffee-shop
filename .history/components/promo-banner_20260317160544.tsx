@@ -7,7 +7,7 @@ export function PromoBanner() {
         <div className="relative overflow-hidden rounded-lg">
             <div className="relative aspect-[2.5/1] md:aspect-[3.5/1] w-full">
                 <Image
-                    src="/Gemini_Generated_Image_hcjixhhcjixhhcji.png"
+                    src="/_I’m just a girl sad hamster TikTok meme_ Sticker for Sale by ARTmhmood.jpeg"
                     src="/Gemini_Generated_Image_hcjixhhcjixhhcji.png"
                     alt="Special promotion"
                     fill
