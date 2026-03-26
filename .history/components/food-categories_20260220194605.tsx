@@ -59,6 +59,14 @@ export function FoodCategories({ onSelectCategory, selectedCategory }: FoodCateg
       )}
 
       <div ref={scrollRef} className="flex space-x-2 overflow-x-auto pb-2 scrollbar-hide">
+        <Button
+          variant={selectedCategory === null ? "default" : "outline"}
+          className="whitespace-nowrap"
+          onClick={() => onSelectCategory?.(null)}
+        >
+          الكل
+        </Button>
+
         {categories.map((category) => (
           <Button
             key={category.id}

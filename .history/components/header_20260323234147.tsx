@@ -25,15 +25,16 @@ export function Header() {
   const totalItems = getCartItemCount()
 
   const routes = [
-    { href: "/menu", label: "الرئيسية" },
+    { href: "/", label: "الرئيسية" },
+    { href: "/menu", label: "المنيو" },
     { href: "/contact", label: "تواصل معنا" },
   ]
 
   const handleAdminClick = () => {
     if (isAccessGranted) {
-      logout()
+      logout() // قفل وضع الإدارة (يتحول لأحمر وتختفي الصلاحيات)
     } else {
-      useAdminStore.setState({ showPasswordModal: true })
+      useAdminStore.setState({ showPasswordModal: true }) // إجبار فتح نافذة الباسورد
     }
   }
 
@@ -45,7 +46,7 @@ export function Header() {
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>
 
-          <Link href="/menu" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <span className="text-xl font-bold"> بن اّسـر</span>
           </Link>
         </div>

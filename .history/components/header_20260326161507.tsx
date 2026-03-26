@@ -25,7 +25,7 @@ export function Header() {
   const totalItems = getCartItemCount()
 
   const routes = [
-    { href: "/menu", label: "الرئيسية" },
+    { href: "/menu", label: "المنيو" },
     { href: "/contact", label: "تواصل معنا" },
   ]
 

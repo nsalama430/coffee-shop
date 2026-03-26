@@ -158,7 +158,7 @@ const urlFriendly = (text: string) => {
 
   // شريط التنقل (Breadcrumbs)
   const breadcrumbs = [
-    { name: "الرئيسية", href: "/menu" },
+    { name: "المنيو", href: "/menu" },
     { name: categoryName.replace('ـ', ''), href: `/menu` },
     { name: `${blendType} ${roastLevel}`, href: "#" }
   ]
@@ -230,7 +230,7 @@ const urlFriendly = (text: string) => {
             </div>
           </div>
         )}
-        <h1 className="text-4xl font-black mb-4 text-center">الرئيسية</h1>
+        <h1 className="text-4xl font-black mb-4 text-center">قائمتنا</h1>
         <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">اكتشف مجموعتنا المتنوعة من أجود أنواع البن المحمص بعناية ليناسب كل الأذواق.</p>
         
         {/* استرجاع شريط التصنيفات العلوية */}
