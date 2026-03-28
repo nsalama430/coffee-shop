@@ -59,7 +59,7 @@ const roastLevels: RoastLevel[] = ["فاتح", "وسط", "غامق (محروق)"
 const blendTypes: BlendType[] = ["سادة", "محوج"];
 
 interface AddProductFormProps {
-  type?: 'coffee' | 'espresso' | 'derivatives';
+  type?: 'coffee' | 'espresso';
 }
 
 export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
@@ -72,9 +72,7 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
     roastLevel: "وسط" as RoastLevel,
     blendType: "سادة" as BlendType,
     ratio: "100",
-    derivativeType: type === 'derivatives' ? "نسكافيه كلاسيك" : "",
-    flavor: type === 'derivatives' ? "كلاسيك" : "",
-    categoryId: type === 'espresso' ? 'اسـبريـسو' : type === 'derivatives' ? 'مشتقات القهوة' : categories[0]?.id || "",
+    categoryId: type === 'espresso' ? 'اسـبريـسو' : categories[0]?.id || "",
   }
 
   const [newProduct, setNewProduct] = useState(initialProductState)
@@ -193,8 +191,6 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
       roastLevel: newProduct.roastLevel,
       blendType: newProduct.blendType,
       ratio: newProduct.ratio,
-      derivativeType: newProduct.derivativeType,
-      flavor: newProduct.flavor,
       categoryId: newProduct.categoryId,
       sizes: validSizes,
       price: validSizes[0].price,
@@ -220,14 +216,14 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
         onClick={() => setIsOpen(true)}
         className={`px-8 py-4 rounded-xl font-bold text-lg shadow-xl hover:scale-105 transition-all flex items-center justify-center gap-2 text-white w-full ${type === 'espresso' ? 'bg-[#5c4033] hover:bg-[#4a3329]' : 'admin-btn-primary'}`}
       >
-        <span>+</span> {type === 'espresso' ? 'إضافة منتج جديد (اسبريسو)' : type === 'derivatives' ? 'إضافة منتج جديد (مشتقات القهوة)' : 'إضافة منتج جديد (قهوة)'}
+        <span>+</span> {type === 'espresso' ? 'إضافة منتج جديد (اسبريسو)' : 'إضافة منتج جديد (قهوة)'}
       </button>
 
       {isOpen && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex justify-center items-center z-50 p-6">
           <div className="admin-card w-full max-w-4xl max-h-[90vh] overflow-y-auto animate-in fade-in slide-in-from-bottom-4 duration-300">
             <div className="flex justify-between items-center mb-8 border-b border-[#D8D2C2] pb-4 sticky top-0 bg-inherit z-10">
-              <h2 className="text-2xl font-black text-[var(--admin-text)]">إضافة منتج جديد ({type === 'espresso' ? 'اسبريسو' : type === 'derivatives' ? 'مشتقات القهوة' : 'قهوة'}) - بن آسر</h2>
+              <h2 className="text-2xl font-black text-[var(--admin-text)]">إضافة منتج جديد ({type === 'espresso' ? 'اسبريسو' : 'قهوة'}) - بن آسر</h2>
               <button onClick={() => setIsOpen(false)} className="text-3xl hover:text-red-500 transition text-[var(--admin-text)]">&times;</button>
             </div>
 
@@ -236,11 +232,11 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
               <div className="space-y-4 p-1">
                 <h3 className="text-xl font-bold text-center text-[var(--admin-text)] border-b-2 border-[#D8D2C2] pb-2 mb-6">تفاصيل المنتج الأساسية</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className={type !== 'coffee' ? "md:col-span-2" : ""}>
+                  <div className={type === 'espresso' ? "md:col-span-2" : ""}>
                     <label className="block text-sm font-bold mb-2 text-[var(--admin-text)]">اسم نوع البن</label>
                     <input name="name" value={newProduct.name} onChange={handleChange} type="text" className="w-full p-3 rounded-lg border admin-border bg-white/50 dark:bg-gray-800 outline-none focus:ring-2 focus:ring-[#B17457] text-[var(--admin-text)]" placeholder="مثلاً: بن يمني إكسبريسو" required />
                   </div>
-                  {type === 'coffee' && (
+                  {type === 'coffee' ? (
                     <>
                       <div>
                         <label className="block text-sm font-bold mb-2 text-[var(--admin-text)]">درجة التحميص</label>
@@ -281,12 +277,11 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
                         </div>
                       </div>
                     </>
-                  )}
-                  {type === 'espresso' && (
+                  ) : (
                     <div className="md:col-span-2">
                       <label className="block text-sm font-bold mb-2 text-[var(--admin-text)]">النسبة</label>
                       <div className="flex gap-2 flex-wrap">
-                        {['100', '90:10', '80:20', '70:30', '60:40', '50:50', '40:60', '30:70', '20:80', '10:90'].map(ratioVal => (
+                        {['90:10', '80:20', '70:30', '60:40', '50:50', '40:60', '30:70', '20:80', '10:90', '100'].map(ratioVal => (
                           <button
                             key={ratioVal}
                             type="button"
@@ -303,50 +298,6 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
                         ))}
                       </div>
                     </div>
-                  )}
-                  {type === 'derivatives' && (
-                    <>
-                      <div className="md:col-span-2">
-                        <label className="block text-sm font-bold mb-2 text-[var(--admin-text)]">النوع (تصنيف المشروب)</label>
-                        <div className="flex gap-2 flex-wrap">
-                          {['نسكافيه كلاسيك', 'نسكافيه جولد', 'بندق فلافر', 'بندق قطع', 'هوت شوكلت', 'قهوة شوكولاتة', 'كابيتشينو'].map(dType => (
-                            <button
-                              key={dType}
-                              type="button"
-                              onClick={() => setNewProduct(prev => ({ ...prev, derivativeType: dType }))}
-                              className={`flex-1 min-w-[100px] p-3 rounded-lg border transition-colors font-bold ${
-                                newProduct.derivativeType === dType
-                                  ? 'bg-[#B17457] text-white border-[#B17457]'
-                                  : 'bg-white/50 dark:bg-gray-800 admin-border text-[var(--admin-text)] hover:bg-gray-100 dark:hover:bg-gray-700'
-                              }`}
-                            >
-                              {dType}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                      {newProduct.derivativeType === 'كابيتشينو' && (
-                        <div className="md:col-span-2">
-                          <label className="block text-sm font-bold mb-2 text-[var(--admin-text)]">نكهة الكابيتشينو</label>
-                          <div className="flex gap-2 flex-wrap">
-                            {['بندق', 'كراميل', 'فانيليا', 'كلاسيك'].map(f => (
-                              <button
-                                key={f}
-                                type="button"
-                                onClick={() => setNewProduct(prev => ({ ...prev, flavor: f }))}
-                                className={`flex-1 min-w-[80px] p-3 rounded-lg border transition-colors font-bold ${
-                                  newProduct.flavor === f
-                                    ? 'bg-[#B17457] text-white border-[#B17457]'
-                                    : 'bg-white/50 dark:bg-gray-800 admin-border text-[var(--admin-text)] hover:bg-gray-100 dark:hover:bg-gray-700'
-                                }`}
-                              >
-                                {f}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </>
                   )}
                    <div className="md:col-span-2">
                     <label className="block text-sm font-bold mb-2 text-[var(--admin-text)]">التصنيف</label>

@@ -10,7 +10,8 @@ import { PromoBannerForm } from "@/components/admin/PromoBannerForm";
 import { EditProductForm } from "@/components/edit-product-form"
 import { useOrderStore } from "@/lib/orderStore"
 import { useAdminStore } from "@/lib/adminStore"
-import type { Order, OrderStatus, Product } from "@/lib/types"
+import type { Order, OrderStatus } from "@/lib/types"
+import type { Product } from "@/lib/orderStore"
 
 export default function AdminDashboard() {
   const router = useRouter()
