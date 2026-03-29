@@ -74,7 +74,7 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
     ratio: "100",
     derivativeType: type === 'derivatives' ? "نسكافيه كلاسيك" : "",
     flavor: type === 'derivatives' ? "كلاسيك" : "",
-    categoryId: type === 'espresso' ? 'اسـبريـسو' : type === 'derivatives' ? 'مشتقات القهوة' : categories.filter(c => c.id !== 'اسـبريـسو' && c.id !== 'مشتقات القهوة')[0]?.id || "",
+    categoryId: type === 'espresso' ? 'اسـبريـسو' : type === 'derivatives' ? 'مشتقات القهوة' : categories[0]?.id || "",
   }
 
   const [newProduct, setNewProduct] = useState(initialProductState)
@@ -368,27 +368,25 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
                       )}
                     </>
                   )}
-                  {type === 'coffee' && (
-                    <div className="md:col-span-2">
-                      <label className="block text-sm font-bold mb-2 text-[var(--admin-text)]">التصنيف</label>
-                      <div className="flex gap-2 flex-wrap">
-                        {categories.filter(c => c.id !== 'اسـبريـسو' && c.id !== 'مشتقات القهوة').map(category => (
-                          <button
-                            key={category.id}
-                            type="button"
-                            onClick={() => handleCategoryChange(category.id)}
-                            className={`flex-1 min-w-[100px] p-3 rounded-lg border transition-colors font-bold ${
-                              newProduct.categoryId === category.id
-                                ? 'bg-[#B17457] text-white border-[#B17457]'
-                                : 'bg-white/50 dark:bg-gray-800 admin-border text-[var(--admin-text)] hover:bg-gray-100 dark:hover:bg-gray-700'
-                            }`}
-                          >
-                            {category.name}
-                          </button>
-                        ))}
-                      </div>
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-bold mb-2 text-[var(--admin-text)]">التصنيف</label>
+                    <div className="flex gap-2 flex-wrap">
+                      {categories.map(category => (
+                        <button
+                          key={category.id}
+                          type="button"
+                          onClick={() => handleCategoryChange(category.id)}
+                          className={`flex-1 min-w-[100px] p-3 rounded-lg border transition-colors font-bold ${
+                            newProduct.categoryId === category.id
+                              ? 'bg-[#B17457] text-white border-[#B17457]'
+                              : 'bg-white/50 dark:bg-gray-800 admin-border text-[var(--admin-text)] hover:bg-gray-100 dark:hover:bg-gray-700'
+                          }`}
+                        >
+                          {category.name}
+                        </button>
+                      ))}
                     </div>
-                  )}
+                  </div>
                   <div className="md:col-span-2">
                     <label className="block text-sm font-bold mb-2 text-[var(--admin-text)]">وصف النكهة</label>
                     <textarea name="description" value={newProduct.description} onChange={handleChange} className="w-full p-3 rounded-lg border admin-border bg-white/50 dark:bg-gray-800 outline-none h-24 text-[var(--admin-text)]" placeholder="اكتبي تفاصيل الطعم والإيحاءات..."></textarea>

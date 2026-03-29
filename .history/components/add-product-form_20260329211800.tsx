@@ -74,7 +74,7 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
     ratio: "100",
     derivativeType: type === 'derivatives' ? "نسكافيه كلاسيك" : "",
     flavor: type === 'derivatives' ? "كلاسيك" : "",
-    categoryId: type === 'espresso' ? 'اسـبريـسو' : type === 'derivatives' ? 'مشتقات القهوة' : categories.filter(c => c.id !== 'اسـبريـسو' && c.id !== 'مشتقات القهوة')[0]?.id || "",
+    categoryId: type === 'espresso' ? 'اسـبريـسو' : type === 'derivatives' ? 'مشتقات القهوة' : categories[0]?.id || "",
   }
 
   const [newProduct, setNewProduct] = useState(initialProductState)
@@ -372,7 +372,7 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
                     <div className="md:col-span-2">
                       <label className="block text-sm font-bold mb-2 text-[var(--admin-text)]">التصنيف</label>
                       <div className="flex gap-2 flex-wrap">
-                        {categories.filter(c => c.id !== 'اسـبريـسو' && c.id !== 'مشتقات القهوة').map(category => (
+                        {categories.map(category => (
                           <button
                             key={category.id}
                             type="button"

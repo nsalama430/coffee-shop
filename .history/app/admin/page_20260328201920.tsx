@@ -902,27 +902,17 @@ export default function AdminDashboard() {
                     <th className="py-3 px-4 text-[var(--admin-text)]">الاسم</th>
                     <th className="py-3 px-4 text-[var(--admin-text)]">رقم الهاتف</th>
                     <th className="py-3 px-4 text-[var(--admin-text)]">العنوان</th>
-                    <th className="py-3 px-4 text-[var(--admin-text)]">عدد الطلبات</th>
-                    <th className="py-3 px-4 text-[var(--admin-text)]">إجمالي المبيعات</th>
                     <th className="py-3 px-4 text-[var(--admin-text)]">آخر ملاحظات</th>
                   </tr>
                 </thead>
                 <tbody>
                   {uniqueCustomers.map((customer: any, index: number) => {
                     if (!customer) return null;
-                    
-                    // حساب عدد وإجمالي الطلبات الخاصة بهذا العميل بناءً على رقم الهاتف
-                    const customerOrders = orders.filter(o => o?.customer?.phone === customer.phone);
-                    const ordersCount = customerOrders.length;
-                    const totalSpent = customerOrders.reduce((sum, o) => sum + (o?.total || 0), 0);
-
                     return (
                       <tr key={index} className="border-b hover:bg-black/5 dark:hover:bg-white/5 transition">
                         <td className="py-4 px-4 text-[var(--admin-text)]">{customer?.firstName || ''} {customer?.lastName || ''}</td>
                         <td className="py-4 px-4 text-[var(--admin-text)]">{customer?.phone || '-'}</td>
                         <td className="py-4 px-4 text-[var(--admin-text)]">{customer?.address || '-'}</td>
-                        <td className="py-4 px-4 text-[var(--admin-text)] font-bold">{ordersCount}</td>
-                        <td className="py-4 px-4 text-[var(--admin-text)] font-bold text-green-600">{totalSpent.toLocaleString('ar-EG', { numberingSystem: 'latn',  style: 'currency', currency: 'EGP' }).replace('ج.م.', 'ج.م')}</td>
                         <td className="py-4 px-4 text-[var(--admin-text)]">{customer?.notes || '-'}</td>
                       </tr>
                     )

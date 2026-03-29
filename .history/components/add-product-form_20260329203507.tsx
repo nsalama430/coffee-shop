@@ -44,8 +44,8 @@ async function uploadToCloudinary(file: File): Promise<string> {
 const generateId = () => `food_${new Date().getTime()}`
 
 interface SizeEntry {
-  id: number; // for unique key in React state
-  name: string; // e.g., "125g"
+  id: number;
+  name: string;
   price: number
   image: string
   uploading: boolean
@@ -74,7 +74,7 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
     ratio: "100",
     derivativeType: type === 'derivatives' ? "نسكافيه كلاسيك" : "",
     flavor: type === 'derivatives' ? "كلاسيك" : "",
-    categoryId: type === 'espresso' ? 'اسـبريـسو' : type === 'derivatives' ? 'مشتقات القهوة' : categories.filter(c => c.id !== 'اسـبريـسو' && c.id !== 'مشتقات القهوة')[0]?.id || "",
+    categoryId: type === 'espresso' ? 'اسـبريـسو' : type === 'derivatives' ? 'مشتقات القهوة' : categories[0]?.id || "",
   }
 
   const [newProduct, setNewProduct] = useState(initialProductState)
@@ -160,7 +160,6 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
     setSizes(prevSizes => prevSizes.map(size => 
       size.id === id ? { ...size, image: "", preview: "" } : size
     ));
-    // مسح قيمة حقل الإدخال
     const fileInput = fileInputRefs.current[id.toString()];
     if (fileInput) {
       fileInput.value = "";
@@ -173,7 +172,7 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    const validSizes = sizes
+    const validSizes: Size[] = sizes
       .filter(s => s.name.trim() !== "" && s.price > 0)
       .map(s => ({
         name: s.name,
@@ -198,7 +197,6 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
       flavor: newProduct.flavor,
       categoryId: newProduct.categoryId,
       sizes: validSizes,
-      // حقول التوافق مع عرض القوائم (يستخدم أول حجم كافتراضي)
       price: validSizes[0].price,
       image: validSizes[0].images[0],
       category: categories.find(c => c.id === newProduct.categoryId)?.name || newProduct.categoryId
@@ -284,46 +282,28 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
                       </div>
                     </>
                   )}
-                  
                   {type === 'espresso' && (
                     <div className="md:col-span-2">
                       <label className="block text-sm font-bold mb-2 text-[var(--admin-text)]">النسبة</label>
-                      <div className="flex flex-col gap-3">
-                        <div className="flex gap-2 flex-wrap justify-center">
-                          {['90:10', '80:20', '70:30', '60:40', '50:50', '40:60', '30:70', '20:80', '10:90'].map(ratioVal => (
-                            <button
-                              key={ratioVal}
-                              type="button"
-                              onClick={() => setNewProduct(prev => ({ ...prev, ratio: ratioVal }))}
-                              className={`flex-1 min-w-[80px] p-3 rounded-lg border transition-colors font-bold ${
-                                newProduct.ratio === ratioVal
-                                  ? 'bg-[#B17457] text-white border-[#B17457]'
-                                  : 'bg-white/50 dark:bg-gray-800 admin-border text-[var(--admin-text)] hover:bg-gray-100 dark:hover:bg-gray-700'
-                              }`}
-                              dir="ltr"
-                            >
-                              {ratioVal}
-                            </button>
-                          ))}
-                        </div>
-                        <div className="flex justify-center">
+                      <div className="flex gap-2 flex-wrap">
+                        {['100', '90:10', '80:20', '70:30', '60:40', '50:50', '40:60', '30:70', '20:80', '10:90'].map(ratioVal => (
                           <button
+                            key={ratioVal}
                             type="button"
-                            onClick={() => setNewProduct(prev => ({ ...prev, ratio: '100' }))}
-                            className={`w-full sm:w-1/3 p-3 rounded-lg border transition-colors font-bold ${
-                              newProduct.ratio === '100'
+                            onClick={() => setNewProduct(prev => ({ ...prev, ratio: ratioVal }))}
+                            className={`flex-1 min-w-[80px] p-3 rounded-lg border transition-colors font-bold ${
+                              newProduct.ratio === ratioVal
                                 ? 'bg-[#B17457] text-white border-[#B17457]'
                                 : 'bg-white/50 dark:bg-gray-800 admin-border text-[var(--admin-text)] hover:bg-gray-100 dark:hover:bg-gray-700'
                             }`}
                             dir="ltr"
                           >
-                            100
+                            {ratioVal}
                           </button>
-                        </div>
+                        ))}
                       </div>
                     </div>
                   )}
-
                   {type === 'derivatives' && (
                     <>
                       <div className="md:col-span-2">
@@ -368,27 +348,25 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
                       )}
                     </>
                   )}
-                  {type === 'coffee' && (
-                    <div className="md:col-span-2">
-                      <label className="block text-sm font-bold mb-2 text-[var(--admin-text)]">التصنيف</label>
-                      <div className="flex gap-2 flex-wrap">
-                        {categories.filter(c => c.id !== 'اسـبريـسو' && c.id !== 'مشتقات القهوة').map(category => (
-                          <button
-                            key={category.id}
-                            type="button"
-                            onClick={() => handleCategoryChange(category.id)}
-                            className={`flex-1 min-w-[100px] p-3 rounded-lg border transition-colors font-bold ${
-                              newProduct.categoryId === category.id
-                                ? 'bg-[#B17457] text-white border-[#B17457]'
-                                : 'bg-white/50 dark:bg-gray-800 admin-border text-[var(--admin-text)] hover:bg-gray-100 dark:hover:bg-gray-700'
-                            }`}
-                          >
-                            {category.name}
-                          </button>
-                        ))}
-                      </div>
+                   <div className="md:col-span-2">
+                    <label className="block text-sm font-bold mb-2 text-[var(--admin-text)]">التصنيف</label>
+                    <div className="flex gap-2 flex-wrap">
+                      {categories.map(category => (
+                        <button
+                          key={category.id}
+                          type="button"
+                          onClick={() => handleCategoryChange(category.id)}
+                          className={`flex-1 min-w-[100px] p-3 rounded-lg border transition-colors font-bold ${
+                            newProduct.categoryId === category.id
+                              ? 'bg-[#B17457] text-white border-[#B17457]'
+                              : 'bg-white/50 dark:bg-gray-800 admin-border text-[var(--admin-text)] hover:bg-gray-100 dark:hover:bg-gray-700'
+                          }`}
+                        >
+                          {category.name}
+                        </button>
+                      ))}
                     </div>
-                  )}
+                  </div>
                   <div className="md:col-span-2">
                     <label className="block text-sm font-bold mb-2 text-[var(--admin-text)]">وصف النكهة</label>
                     <textarea name="description" value={newProduct.description} onChange={handleChange} className="w-full p-3 rounded-lg border admin-border bg-white/50 dark:bg-gray-800 outline-none h-24 text-[var(--admin-text)]" placeholder="اكتبي تفاصيل الطعم والإيحاءات..."></textarea>
@@ -400,7 +378,7 @@ export function AddProductForm({ type = 'coffee' }: AddProductFormProps) {
               <div className="space-y-8 p-1">
                 <h3 className="text-xl font-bold text-center text-[var(--admin-text)] border-b-2 border-[#D8D2C2] pb-2 mb-6">الأحجام والأسعار والصور</h3>
                 
-                {sizes.map((size, index) => (
+                {sizes.map((size) => (
                   <div key={size.id} className="p-4 border rounded-lg admin-border space-y-4 bg-white/20 dark:bg-white/5 relative">
                     {sizes.length > 1 && (
                       <button type="button" onClick={() => removeSize(size.id)} className="absolute -top-3 -left-3 bg-red-500 text-white rounded-full p-1 w-7 h-7 flex items-center justify-center shadow-md hover:bg-red-600">

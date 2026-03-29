@@ -98,7 +98,7 @@ export default function MenuPage() {
   const slug = params.slug as string[] || []
 
   const autoplayPlugin = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: false })
+    Autoplay({ delay: 3500, stopOnInteraction: true })
   )
 // تعريف الهيكل الجديد للمنيو: أقسام كبيرة (سادة/محوج) وداخلها صفوف (فاتح/وسط/غامق)
 const menuStructure = [
