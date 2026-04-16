@@ -31,7 +31,7 @@ export default function CheckoutPage() {
         icon={<ShoppingBag className="h-12 w-12" />}
         title="سلة التسوق فارغة"
         description="أضف بعض المنتجات لسلة التسوق قبل إتمام الطلب."
-        action={<Button onClick={() => router.push("/home")}>تصفح المنيو</Button>}
+        action={<Button onClick={() => router.push("/menu")}>تصفح المنيو</Button>}
       />
     )
   }

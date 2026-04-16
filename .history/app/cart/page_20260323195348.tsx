@@ -18,7 +18,7 @@ export default function CartPage() {
         icon={<ShoppingBag className="h-12 w-12" />}
         title="سلة التسوق فارغة"
         description="أضف بعض المنتجات الرائعة لسلة التسوق وستظهر هنا."
-        action={<Button onClick={() => router.push("/home")}>تصفح المنيو</Button>}
+        action={<Button onClick={() => router.push("/menu")}>تصفح المنيو</Button>}
       />
     )
   }
